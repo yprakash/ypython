@@ -1,3 +1,5 @@
+# @author: yprakash
+
 class Solution:
     # https://leetcode.com/submissions/detail/704885972/
     def shuffle(self, nums: List[int], n: int) -> List[int]:

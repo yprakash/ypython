@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/number-of-good-pairs/
+# @author: yprakash
 
 from collections import Counter
 

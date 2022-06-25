@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/decompress-run-length-encoded-list/
+# @author: yprakash
 
 class Solution:
     # https://leetcode.com/submissions/detail/706396330/

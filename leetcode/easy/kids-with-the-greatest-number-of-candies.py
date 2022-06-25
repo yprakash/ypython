@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/
+# @author: yprakash
 
 class Solution:
     # https://leetcode.com/submissions/detail/704954208/

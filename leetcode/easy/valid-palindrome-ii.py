@@ -1,6 +1,4 @@
 # author: yprakash
-# https://leetcode.com/problems/valid-palindrome-ii
-# https://leetcode.com/submissions/detail/692150706/
 
 class Solution:
     def isPalindrome(self, s, l, r):
@@ -11,6 +9,7 @@ class Solution:
             r -= 1
         return True
 
+    # https://leetcode.com/submissions/detail/692150706/
     def validPalindrome(self, s: str) -> bool:
         chance = True
         l, r = 0, len(s) - 1
