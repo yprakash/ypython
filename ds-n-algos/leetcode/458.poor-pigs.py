@@ -1,6 +1,7 @@
 # @author: yprakash
 
 class Solution:
+    # https://leetcode.com/submissions/detail/766346172/
     def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
         pigs = 0
         tests = int(1 + minutesToTest / minutesToDie)
