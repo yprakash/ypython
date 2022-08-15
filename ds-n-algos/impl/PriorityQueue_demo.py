@@ -40,10 +40,10 @@ class PriorityQueue(object):
         if self.is_empty():
             return None  # raise "EMPTY PriorityQueue"
         if self.size() <= 2:
-            return self.heap.pop()
+            return self.heap.pop(0)
 
-        elem = self.he  ap[0]
-        self.heap[0] = self.heap.pop()
+        elem = self.heap[0]
+        self.heap[0] = self.heap.pop(0)
         p, c = 0, self._get_bigger_child_index(0)
 
         while c and self.heap[p] < self.heap[c]:
