@@ -25,3 +25,14 @@ class Solution:
                 res.append(i)
 
         return res
+
+
+testcases = [
+    ["barfoothefoobarman", ["foo","bar"]],  # [0, 9]
+    ["barfoofoobarthefoobarman", ["bar","foo","the"]],  # [6, 9, 12]
+    ["wordgoodgoodgoodbestword", ["word","good","best","good"]],  # [8]
+    ["wordgoodgoodgoodbestword", ["word","good","best","word"]],  # []
+]
+for testcase in testcases:
+    obj = Solution()
+    print(obj.findSubstring(testcase[0], testcase[1]))
