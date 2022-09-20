@@ -63,3 +63,12 @@ class TreeNode(object):
         self.val = val
         self.left = left
         self.right = right
+
+
+if __name__ == "__main__":
+    testcases = [
+    ]
+    for testcase in testcases:
+        #obj = Solution()
+        #print(obj.maxProfit(testcase))
+        pass
