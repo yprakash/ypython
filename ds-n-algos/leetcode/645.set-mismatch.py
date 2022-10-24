@@ -1,6 +1,7 @@
 # @author: yprakash
 
 class Solution:
+    # https://leetcode.com/submissions/detail/828304068/
     def findErrorNums(self, nums: List[int]) -> List[int]:
         int_map = {}
         repeating, missing = 0, 0
