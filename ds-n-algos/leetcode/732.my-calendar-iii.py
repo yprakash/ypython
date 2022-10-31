@@ -2,6 +2,7 @@
 from sortedcontainers import SortedList
 
 
+# https://leetcode.com/submissions/detail/834106963/
 class MyCalendarThree:
     def __init__(self):
         self.times = SortedList()
