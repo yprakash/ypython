@@ -4,6 +4,41 @@ from typing import List
 
 
 class Solution:
+    # https://leetcode.com/submissions/detail/835113815/
+    def minMutation2(self, start: str, end: str, bank: List[str]) -> int:
+        # returns True only if there is at most one character difference
+        def can_mutate(src, target):
+            mute = False
+            for x, y in zip(src, target):
+                if x != y:
+                    if mute:
+                        return False
+                    mute = True
+
+            return True
+
+        visited = set()
+        mutations = 0
+        q = deque()
+        q.append(start)
+
+        while q:
+            size = len(q)
+            while size > 0:
+                size -= 1
+                curr = q.popleft()
+                if curr == end:
+                    return mutations
+
+                visited.add(curr)
+                for gene in bank:
+                    if gene not in visited and can_mutate(curr, gene):
+                        q.append(gene)
+
+            mutations += 1
+
+        return -1
+
     # https://leetcode.com/submissions/detail/835083496/
     def minMutation(self, start: str, end: str, bank: List[str]) -> int:
         visited = set()
