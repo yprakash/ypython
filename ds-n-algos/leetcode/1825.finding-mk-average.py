@@ -73,3 +73,58 @@ class MKAverage2:
         if len(self.q) < self.m:
             return -1
         return self.sum // self.n  # O(1)
+
+
+def _cleanup(heap):
+    while heap and heap[0].deleted:
+        heapq.heappop(heap)
+
+
+class MKAverage:  # InComplete addElement method
+    class Node:
+        def __init__(self, val):
+            self.val = val
+            self.deleted = False
+            self.next = None
+
+        # Write a wrapper class that overrides ‘<‘ operator, as heapq only accepts iterables
+        def __lt__(self, other):
+            return self.val < other.val
+
+    def __init__(self, m: int, k: int):
+        self.k = k
+        self.m = m
+        self.sum = 0
+        self.head = None
+        self.tail = None
+        self.max_heap1 = []  # to store first part
+        self.min_heap2 = []  # to store middle part
+        self.min_heap3 = []  # to store last part
+        self.n = 0  # exact length of all 3 lists above (excluding deleted)
+
+    def calculateMKAverage(self) -> int:
+        if len(self.q) < self.m:
+            return -1
+        return self.sum // self.n  # O(1)
+
+    def addElement(self, num: int) -> None:
+        if not self.head:
+            self.head = self.tail = self.Node(num)
+            self.max_heap1.append(self.head)
+            return
+
+        if self.n == self.m:
+            _cleanup(self.min_heap2)  # continue
+            if self.head.val < self.min_heap2[0].val:
+                # item to be removed is in self.max_heap1 first part
+                self.sum -= self.min_heap2[0].val
+                self.sum += self.min_heap3[0].val
+                heapq.heappush(self.max_heap1, heapq.heappop(self.min_heap2))
+            # we need remove head element
+            self.head.deleted = True
+            self.head = self.head.next
+
+        if len(self.max_heap1) < self.k:
+            self.tail.next = self.Node(num)
+            self.tail = self.tail.next
+            heapq.heappush(self.max_heap1, self.tail)
