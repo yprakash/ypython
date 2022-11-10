@@ -1,8 +1,26 @@
 # @author: yprakash
+import math
+from typing import List
+
 
 class Solution(object):
+    # https://leetcode.com/submissions/detail/840553012/
+    # O(1) space & O(N) Time
+    def maxProfit(self, prices: List[int]) -> int:
+        profit1, profit2 = 0, 0
+        buy_price1, buy_price2 = math.inf, math.inf
+
+        for curr_price in prices:
+            buy_price1 = min(buy_price1, curr_price)
+            profit1 = max(profit1, curr_price - buy_price1)
+            buy_price2 = min(buy_price2, curr_price - profit1)
+            profit2 = max(profit2, curr_price - buy_price2)
+
+        return profit2
+
     # DP based on the recurrence relation from Naive approach
     # https://leetcode.com/submissions/detail/796227422/
+    # O(N) space & Time
     def maxProfit(self, prices):
         profit = 0
         min_till_now = prices[0]
