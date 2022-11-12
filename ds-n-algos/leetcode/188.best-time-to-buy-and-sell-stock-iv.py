@@ -1,8 +1,25 @@
 # @author: yprakash
+from typing import List
+
 
 class Solution(object):
+    # Recursive Solution Time Limit Exceeded
+    # https://leetcode.com/submissions/detail/840670576/
+    def maxProfit5(self, k: int, prices: List[int]) -> int:
+        def max_profit(kk, pp):
+            if kk == 0 or pp < 1:
+                return 0
+
+            mp = max(prices[pp] - prices[i] + max_profit(kk - 1, i)
+                     for i in range(pp))  # If u buy on ith day and sell on pp/current day
+
+            return max(mp,  # If you choose to sell on today/pp day
+                       max_profit(kk, pp - 1))  # NO transaction today
+
+        return max_profit(k, len(prices) - 1)
+
     # https://leetcode.com/submissions/detail/796296049/
-    def maxProfit(self, k, prices):
+    def maxProfit4(self, k, prices):
         if k <= 0 or len(prices) < 2:
             return 0
         profit = [[0] * len(prices) for _ in range(k+1)]
