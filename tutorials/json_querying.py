@@ -8,6 +8,22 @@ class Solution:
         if url:
             with urllib.request.urlopen("https://" + url) as url:
                 self.contacts = json.load(url)
+        else:
+            s = '[{"id":1,"name":"Vinay Kumar","username":"vinayk","email":' + \
+                '"vinayk@abcu.com","address":{"street":"random1","suite":"APR",' + \
+                '"city":"Mumbai","zipcode":"192008-13874","geo":{"lat":"-17.3159",' + \
+                '"lng":"91.1496"}},"website":"seuinfra.org","company":{"name":"sec infra",' + \
+                '"basename":"seu infra tech"}},{"id":2,"name":"Anandita Basu","username":' + \
+                '"PrernaB","email":"Anandita.b@abc1f.cpm","address":{"street":"Hawroh Bridge",' + \
+                '"suite":"ATY","city":"Kolkata","zipcode":"700001","geo":{"lat":"-67.3159",' + \
+                '"lng":"91.8006"}},"website":"techInfar.org","company":{"name":' + \
+                '"tech infar world","basename":"seu infra tech"}},{"id":3,"name":' + \
+                '"Charvi Malhotra","username":"CharviM","email":"Charvim@mail.net",' + \
+                '"address":{"street":"whitehouse Extension","suite":"A782","city":"Bengaluru",' + \
+                '"zipcode":"560001","geo":{"lat":"-68.6102","lng":"-47.0653"}},"website":' + \
+                '"Infesystem.info","company":{"name":"infeystems","basename":"Information E stsyem"}}]'
+
+            self.contacts = json.loads(s)
 
         print(len(self.contacts), 'contacts loaded')
 
@@ -33,8 +49,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    lru = ''
-    result = Solution(''.join(list(reversed(lru))))
+    result = Solution()
     testcases = [
         ["username", "EQUALS", "vinayk"],  # [1]
         ["address.city", "EQUALS", "Kolkata"],  # [2]
