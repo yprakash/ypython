@@ -1,3 +1,7 @@
+# @author: yprakash
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
@@ -6,7 +10,6 @@ class TreeNode(object):
         self.right = right
 
 
-# @author: yprakash
 class Solution(object):
     def complete_binary_tree_height(self, node):  # O(log N)
         height = 0
@@ -34,6 +37,31 @@ class Solution(object):
             left_leaves = left_leaves >> 1
 
         return total_nodes
+
+    # https://leetcode.com/submissions/detail/843614246/
+    def countNodes2(self, root: Optional[TreeNode]) -> int:
+        def left_height(node):
+            h = 0
+            while node:
+                h += 1
+                node = node.left
+            return h
+
+        def right_height(node):  # O(log N)
+            h = 0
+            while node:
+                h += 1
+                node = node.right
+            return h
+
+        def total_nodes(node):
+            lh = left_height(node)
+            rh = right_height(node)
+            if lh == rh:
+                return (1 << lh) - 1
+            return 1 + total_nodes(node.left) + total_nodes(node.right)
+
+        return total_nodes(root)
 
 
 obj = Solution()
