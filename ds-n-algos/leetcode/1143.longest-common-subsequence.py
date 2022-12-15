@@ -3,6 +3,7 @@ from functools import cache
 
 
 class Solution:
+    # https://leetcode.com/problems/longest-common-subsequence/submissions/859939707/
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         @cache
         def longest(t1, t2):
