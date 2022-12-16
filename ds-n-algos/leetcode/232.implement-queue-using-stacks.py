@@ -1,6 +1,8 @@
 # @author: yprakash
-# https://leetcode.com/submissions/detail/731123646/
+from collections import deque
 
+
+# https://leetcode.com/submissions/detail/731123646/
 class MyQueue(object):
     def __init__(self):
         self.stack1 = []
@@ -26,6 +28,24 @@ class MyQueue(object):
         self.fill_up()
         # return len(self.stack2) == 0
         return False if self.stack2 else True
+
+
+# https://leetcode.com/problems/implement-queue-using-stacks/submissions/860437996/
+class MyQueue2:  # python3
+    def __init__(self):
+        self.stack = deque()
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+
+    def pop(self) -> int:
+        return self.stack.popleft()
+
+    def peek(self) -> int:
+        return self.stack[0]
+
+    def empty(self) -> bool:
+        return len(self.stack) == 0
 
 
 obj = MyQueue()
