@@ -1,7 +1,26 @@
 # @author: yprakash
+from functools import lru_cache
+from typing import List
+
+
+class Solution2:
+    # https://leetcode.com/problems/jump-game/submissions/865508326/
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums) - 1
+
+        @lru_cache(maxsize=None)
+        def can_jump(i):
+            if i >= n:
+                return True
+            if nums[i] == 0:
+                return False
+            return any(can_jump(j) for j in range(i+nums[i], i, -1))
+
+        return can_jump(0)
+
 
 class Solution(object):
-    # https://leetcode.com/submissions/detail/742327563/
+    # https://leetcode.com/problems/jump-game/submissions/742327563/
     def canJump(self, nums):
         if len(nums) < 2:
             return True
