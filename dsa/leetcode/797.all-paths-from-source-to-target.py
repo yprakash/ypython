@@ -1,5 +1,24 @@
 # @author: yprakash
 from collections import deque
+from typing import List
+
+
+# https://leetcode.com/problems/all-paths-from-source-to-target/submissions/867804850/
+class SolutionQ(object):
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        res = []
+        n = len(graph) - 1
+        q = deque([[0]])
+
+        while q:
+            path = q.popleft()
+            for node in graph[path[-1]]:
+                if node == n:
+                    res.append(path + [node])
+                else:
+                    q.append(path + [node])
+
+        return res
 
 
 class Solution(object):
