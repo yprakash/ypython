@@ -8,7 +8,43 @@ class TrieNode:
         self.end_of_word = end_of_word
 
 
-# https://leetcode.com/problems/concatenated-words/submissions/887119717/
+# https://leetcode.com/problems/concatenated-words/submissions/887424440/
+class Solution:
+    def trie_insert(self, node, word):
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+        node.end_of_word = True
+
+    def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
+        dp = {}
+        root = TrieNode()
+        for w in words:
+            self.trie_insert(root, w)
+
+        def concatenated(word, index=0):
+            node = root
+            i = index
+
+            while i < len(word):
+                if node.end_of_word:
+                    if word[i:] not in dp:
+                        dp[word[i:]] = concatenated(word, i)
+                    if dp[word[i:]]:
+                        return True
+
+                if word[i] not in node.children:
+                    return False
+                node = node.children[word[i]]
+                i += 1
+
+            return index > 0 and node.end_of_word
+
+        return [w for w in words if concatenated(w)]
+
+
+# TLE https://leetcode.com/problems/concatenated-words/submissions/887119717/
 class Solution1:
     def trie_insert(self, node, word):
         for c in word:
@@ -41,7 +77,7 @@ class Solution1:
         return [w for w in words if concatenated(w)]
 
 
-# https://leetcode.com/problems/concatenated-words/submissions/887113519/
+# TLE https://leetcode.com/problems/concatenated-words/submissions/887113519/
 class Solution2:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         dp = set()
