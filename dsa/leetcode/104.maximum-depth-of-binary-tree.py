@@ -1,5 +1,5 @@
 # @author: yprakash
-
+from collections import deque
 from typing import Optional
 
 
@@ -11,6 +11,25 @@ class TreeNode:
 
 
 class Solution:
+    # https://leetcode.com/problems/maximum-depth-of-binary-tree/submissions/898862023/
+    def maxDepthIterative(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        q = deque()
+        q.append(root)
+        depth = 0
+
+        while q:
+            depth += 1
+            for i in range(len(q)):
+                node = q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+
+        return depth
+
     # https://leetcode.com/submissions/detail/740216774/
     # (Tail?) Recursion
     def recurse(self, root, depth):
