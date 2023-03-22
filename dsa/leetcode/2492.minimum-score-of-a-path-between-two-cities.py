@@ -5,9 +5,31 @@ from typing import List
 
 
 class Solution:
+    # https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/submissions/920027455/
+    def minScore(self, n: int, roads: List[List[int]]) -> int:
+        adj = defaultdict(list)
+        for a, b, d in roads:
+            adj[a].append((b, d))
+            adj[b].append((a, d))
+
+        ans = 10000  # INT_MAX
+        visited = set()
+        visited.add(1)
+        q = deque([1])
+
+        while q:
+            city = q.popleft()
+            for c, d in adj[city]:
+                ans = min(ans, d)
+                if c not in visited:
+                    q.append(c)
+                    visited.add(c)
+
+        return ans
+
     # https://leetcode.com/submissions/detail/854422816/
     # Only difference between 2 methods is type(visited)
-    def minScore(self, n: int, roads: List[List[int]]) -> int:
+    def minScore1(self, n: int, roads: List[List[int]]) -> int:
         adj_list = defaultdict(list)
         for s, t, d in roads:
             adj_list[s].append((t, d))
