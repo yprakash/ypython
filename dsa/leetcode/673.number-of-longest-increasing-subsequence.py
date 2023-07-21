@@ -3,6 +3,7 @@ from typing import List
 
 
 class Solution:
+    # https://leetcode.com/problems/number-of-longest-increasing-subsequence/submissions/1000099271/
     def findNumberOfLIS(self, nums: List[int]) -> int:
         counts = [1] * len(nums)
         dp = [1] * len(nums)
