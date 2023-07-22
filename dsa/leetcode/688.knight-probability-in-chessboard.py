@@ -2,7 +2,22 @@
 from functools import lru_cache
 
 
-class Solution(object):
+class Solution:
+    # https://leetcode.com/problems/knight-probability-in-chessboard/submissions/1000555268/
+    def knightProbability2(self, n: int, k: int, row: int, column: int) -> float:
+        directions = [[-1, -2], [-2, -1], [-2, 1], [-1, 2],
+                      [1, 2], [2, 1], [2, -1], [1, -2]]
+
+        @cache
+        def probability(m, r, c):
+            if not (0 <= r < n and 0 <= c < n):
+                return 0
+            if m <= 0:
+                return 1
+            return sum(probability(m-1, r+x, c+y) / 8 for x, y in directions)
+
+        return probability(k, row, column)
+
     # https://leetcode.com/submissions/detail/780430440/
     def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
         directions = [[-1, -2], [-2, -1], [-2, 1], [-1, 2],
