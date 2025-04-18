@@ -6,11 +6,20 @@ from itertools import groupby
 class Solution:
     def countAndSay(self, n: int) -> str:
         def next_term(s):
-            return "".join(f"{len(list(group))}{ch}" for ch, group in groupby(s))
+            # len(list(group)): inefficient, materializes the entire group into memory just to count it.
+            # A more memory-efficient and slightly faster approach uses sum(1 for _ in group)
+            return "".join(f"{sum(1 for _ in group)}{ch}" for ch, group in groupby(s))
 
         # functools.reduce(function, iterable, initializer) takes an iterable and reduces it to a single value by
         # applying the function cumulatively. lambda takes 2 arguments: accumulator: the result so far, starts as '1'
         # _: the current item in the iterable (in this case, we ignore it)
+        return reduce(lambda acc, _: next_term(acc), range(n - 1), '1')
+
+class Solution3:
+    def countAndSay(self, n: int) -> str:
+        def next_term(s):
+            return "".join(f"{len(list(group))}{ch}" for ch, group in groupby(s))
+
         return reduce(lambda acc, _: next_term(acc), range(n - 1), '1')
 
 class Solution2:
